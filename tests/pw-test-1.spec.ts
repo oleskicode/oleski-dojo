@@ -23,9 +23,15 @@ test('test', async ({ page }) => {
   // await expect(page.locator('code').filter({ hasText: 'pnpm create playwright' })).toBeVisible();
   await expect(page.locator('#installing-playwright + p + div').filter({ hasText: 'pnpm create playwright' })).toBeVisible();
 
+  // check that pnpm example test is not visible
+  await expect(page.locator('#running-the-example-test + p + div .function').nth(1)).not.toBeVisible();
+
   // await page.locator('.tabs__item').first().click();
   await page.locator('.tabs__item').nth(5).click(); // running example test  pnpm
   
   // await expect(page.locator('article')).toContainText('pnpm exec playwright test');
   await expect(page.locator('#running-the-example-test + p + div')).toContainText('pnpm exec playwright test');
+
+  // check that pnpm example test is now visible
+  await expect(page.locator('#running-the-example-test + p + div .function').nth(1)).toBeVisible();
 });
