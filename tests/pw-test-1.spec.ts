@@ -16,12 +16,16 @@ test('test', async ({ page }) => {
   await page.locator('#installing-playwright + p + div').filter({hasText: 'init playwright@latest'}).click();
 
   await page.locator('.tabs > li:nth-child(2)').first().click(); //switch to yarn tab
-
   // await expect(page.locator('code').filter({ hasText: 'yarn create playwright' })).toBeVisible();
   await expect(page.locator('#installing-playwright + p + div').filter({ hasText: 'yarn create playwright' })).toBeVisible();
   
-  // await page.locator('.tabs > li:nth-child(3)').first().click();
+  await page.locator('.tabs > li:nth-child(3)').first().click();
   // await expect(page.locator('code').filter({ hasText: 'pnpm create playwright' })).toBeVisible();
+  await expect(page.locator('#installing-playwright + p + div').filter({ hasText: 'pnpm create playwright' })).toBeVisible();
+
   // await page.locator('.tabs__item').first().click();
-  // await expect(page.getByRole('article')).toContainText('npx playwright test');
+  await page.locator('.tabs__item').nth(5).click(); // running example test  pnpm
+  
+  // await expect(page.locator('article')).toContainText('pnpm exec playwright test');
+  await expect(page.locator('#running-the-example-test + p + div')).toContainText('pnpm exec playwright test');
 });
